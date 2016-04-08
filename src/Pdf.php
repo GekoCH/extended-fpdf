@@ -24,7 +24,7 @@ class Pdf extends FPDF
      * @var int $nrOfPages
      *
      */
-    private $nrOfPages = 0;
+    protected $nrOfPages = 0;
 
     /**
      *
@@ -33,7 +33,7 @@ class Pdf extends FPDF
      * @var string $imagePath
      *
      */
-    private $imagePath = "";
+    protected $imagePath = "";
 
     /**
      *
@@ -42,14 +42,14 @@ class Pdf extends FPDF
      * @var array $addedFonts
      *
      */
-    private $addedFonts = array();
+    protected $addedFonts = array();
 
     /**
      * Rotation angle
      *
      * @var integer
      */
-    private $angle;
+    protected $angle;
 
     /**
      *
@@ -413,6 +413,26 @@ class Pdf extends FPDF
     public function setImagePath($path)
     {
         $this->imagePath = realpath($path);
+    }
+
+    /**
+     * Get image path.
+     *
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * Get added fonts
+     *
+     * @return array
+     */
+    public function getAddedFonts()
+    {
+        return $this->addedFonts;
     }
 
     /**
@@ -1003,7 +1023,7 @@ class Pdf extends FPDF
         if ($this->angle!=0) {
             $this->_out('Q');
         }
-        $this->angle=$angle;
+        $this->angle = $angle;
         if ($angle != 0) {
             $angle*=M_PI/180;
             $c=cos($angle);
@@ -1022,6 +1042,16 @@ class Pdf extends FPDF
                 -$cy
             ));
         }
+    }
+
+    /**
+     * Get angle
+     *
+     * @return int
+     */
+    public function getAngle()
+    {
+        return $this->angle;
     }
 
     /**
